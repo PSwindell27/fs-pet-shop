@@ -34,7 +34,7 @@ server.get("/pets", (req, res, next) => {
 
 
 server.get("/pets/:id", (req, res, next) => {
-    const id = req.params;
+    const id = req.params.id;
     //tagged template literal
     sql`SELECT * FROM pets WHERE id = ${id}`.then((result) =>{
         if(result.length === 0){
@@ -42,7 +42,7 @@ server.get("/pets/:id", (req, res, next) => {
             res.set("Content-Type", "text/plain");
             res.end("Not Found");
         }else{
-        res.json(result[0]);
+        res.json(result);
         }
     })
     .catch(next);
